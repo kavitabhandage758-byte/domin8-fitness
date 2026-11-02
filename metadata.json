@@ -1,0 +1,6 @@
+{
+  "name": "DOMIN8 FITNESS CLUB - Solapur",
+  "description": "Premium, modern, and fully responsive website for DOMIN8 FITNESS CLUB, Solapur, Maharashtra. Features facilities, BMI calculator, gallery, and WhatsApp enquiry.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
