@@ -69,6 +69,14 @@
       --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    html, body {
+      max-width: 100vw;
+      width: 100%;
+      overflow-x: clip !important;
+      overflow-x: hidden !important;
+      position: relative;
+    }
+
     html {
       scroll-behavior: smooth;
       color-scheme: dark;
@@ -80,7 +88,6 @@
       background-color: var(--bg-black);
       color: var(--text-silver);
       line-height: 1.6;
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -123,10 +130,41 @@
 
     @media (max-width: 768px) {
       .section {
-        padding: 64px 0;
+        padding: 56px 0;
+        overflow-x: hidden;
       }
       .container {
-        padding: 0 18px;
+        padding: 0 16px;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      .facilities-grid,
+      .gallery-grid,
+      .why-grid,
+      .hero-strip,
+      .about-pillars {
+        grid-template-columns: 1fr !important;
+      }
+      .facility-card,
+      .gallery-item,
+      .why-card,
+      .faq-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+      }
+      .faq-question {
+        padding: 16px 18px !important;
+        font-size: 0.95rem !important;
+        gap: 12px !important;
+      }
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .hero-actions .btn {
+        width: 100%;
       }
     }
 
@@ -398,25 +436,31 @@
     .mobile-drawer {
       position: fixed;
       top: 0;
-      right: -100%;
+      right: 0;
       width: 82%;
-      max-width: 380px;
+      max-width: 320px;
       height: 100vh;
+      height: 100dvh;
       background: rgba(12, 12, 16, 0.98);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-left: 1px solid var(--border-subtle);
       z-index: 1005;
-      padding: 90px 32px 40px;
+      padding: 90px 24px 40px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(100%);
+      visibility: hidden;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
       box-shadow: -10px 0 35px rgba(0, 0, 0, 0.7);
     }
 
     .mobile-drawer.open {
-      right: 0;
+      transform: translateX(0);
+      visibility: visible;
+      pointer-events: auto;
     }
 
     .mobile-overlay {
@@ -928,6 +972,7 @@
 
     .bmi-card-wrapper {
       max-width: 920px;
+      width: 100%;
       margin: 0 auto;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -936,6 +981,7 @@
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
       position: relative;
       overflow: hidden;
+      contain: paint;
     }
 
     @media (max-width: 768px) {
@@ -947,10 +993,10 @@
     .bmi-card-wrapper::after {
       content: '';
       position: absolute;
-      top: -120px;
-      right: -120px;
-      width: 280px;
-      height: 280px;
+      top: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
       background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%);
       pointer-events: none;
     }
@@ -3002,6 +3048,7 @@
       mobileDrawer.classList.add('open');
       mobileOverlay.classList.add('open');
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     }
 
     function closeMobileMenu() {
@@ -3009,6 +3056,7 @@
       mobileDrawer.classList.remove('open');
       mobileOverlay.classList.remove('open');
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     }
 
     if (menuToggle) {
